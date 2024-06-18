@@ -1,0 +1,17 @@
+<-- To run BaseDocekr -->
+sudo docker build -t base-report .
+
+<-- Docker run in debugging mode -->
+sudo docker run --restart=always -it --name knitting-report -v /home/kniti/projects/knit-i/knitting-report/:/app -v /home/kniti/projects/knit-i/knitting-core/:/app/knitting-core -v /home/kniti/projects/knit-i/knitting-core/system_stats.log:/app/system_stats.log -v /home/kniti/Desktop/fabric_report:/app/report/fabric -v /home/kniti/Desktop/uptime:/app/report/uptime -v /home/kniti/Desktop/performance:/app/report/performance -v /home/kniti/Desktop/alarm_log:/app/report/image -v /home/kniti/projects/knit-i/config/reportconfig.ini:/app/reportconfig.ini --network=host  -e "DB_DBNAME=knitting" -e "DB_PORT=5432" -e "DB_USER=postgres" -e "DB_PASS=55555" -e "DB_HOST=127.0.0.1" --privileged report:latest
+
+<-- Docker run CMD -->
+sudo docker run --restart=always -it --name knitting-report -v /home/kniti/projects/knit-i/knitting-core/:/app/knitting-core -v /home/kniti/projects/knit-i/knitting-core/system_stats.log:/app/system_stats.log -v /home/kniti/projects/knit-i/knitting-core/greencam1_uptime.log:/app/green_cam/greencam1_uptime.log -v /home/kniti/projects/knit-i/knitting-core/greencam2_uptime.log:/app/green_cam/greencam2_uptime.log -v /home/kniti/Desktop/fabric_report:/app/report/fabric -v /home/kniti/Desktop/uptime:/app/report/uptime -v /home/kniti/Desktop/green_cam:/app/report/green_cam -v /home/kniti/Desktop/performance:/app/report/performance -v /home/kniti/Desktop/alarm_log:/app/report/image -v /home/kniti/projects/knit-i/config/reportconfig.ini:/app/reportconfig.ini --network=host -e "DB_DBNAME=knitting" -e "DB_PORT=5432" -e "DB_USER=postgres" -e "DB_PASS=55555" -e "DB_HOST=127.0.0.1" --privileged report:latest
+
+<-- Build Base-Docker run CMD -->
+sudo docker build -t base-docker .
+
+<-- Build Docker run CMD -->
+sudo docker build -t report .
+
+<- Remove the container ->
+sudo docker rm -f knitting-report
